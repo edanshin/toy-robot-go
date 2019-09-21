@@ -24,7 +24,16 @@ func Place(position Position, direction string) Robot {
 
 // Move will move a toy robot one unit forward in the direction it is currently facing
 func (robot *Robot) Move() {
-
+	switch robot.Direction {
+	case "NORTH":
+		robot.Position.Y++
+	case "SOUTH":
+		robot.Position.Y--
+	case "EAST":
+		robot.Position.X++
+	case "WEST":
+		robot.Position.X--
+	}
 }
 
 // Left will rotate a robot 90 degrees to the left without changing its position
