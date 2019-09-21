@@ -19,8 +19,13 @@ func direction() []string {
 }
 
 // Place will put a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
-func Place() {
+func Place(position Position, direction string) Robot {
+	robot := Robot{
+		Position:  position,
+		Direction: direction,
+	}
 
+	return robot
 }
 
 // Move will move a toy robot one unit forward in the direction it is currently facing
