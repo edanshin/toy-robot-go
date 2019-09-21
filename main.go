@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"./robot"
@@ -21,7 +22,14 @@ func main() {
 
 		regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
 		if regex {
-			rbt = robot.Place(robot.Position{X: 4, Y: 4}, "")
+			cmd := strings.Split(command, " ")
+			cmd = strings.Split(cmd[1], ",")
+
+			x, _ := strconv.Atoi(cmd[0])
+			y, _ := strconv.Atoi(cmd[1])
+			direction := cmd[2]
+
+			rbt = robot.Place(robot.Position{X: x, Y: y}, direction)
 		}
 
 		switch command {
