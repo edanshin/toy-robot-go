@@ -3,16 +3,18 @@ package robot
 import "fmt"
 
 const (
-	north = "NORTH"
-	south = "SOUTH"
-	east  = "EAST"
-	west  = "WEST"
+	north direction = 0
+	east  direction = 1
+	south direction = 2
+	west  direction = 3
 )
+
+type direction int
 
 // Robot .
 type Robot struct {
 	Position  Position
-	Direction string
+	Direction direction
 }
 
 // Position of a robot .
@@ -21,8 +23,20 @@ type Position struct {
 	Y int
 }
 
+func (direction direction) String() string {
+	// declare an array of directions
+	directions := []string{
+		"NORTH",
+		"EAST",
+		"SOUTH",
+		"WEST",
+	}
+
+	return directions[direction]
+}
+
 // Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
-func Place(position Position, direction string) Robot {
+func Place(position Position, direction direction) Robot {
 	robot := Robot{
 		Position:  position,
 		Direction: direction,
@@ -47,33 +61,23 @@ func (robot *Robot) Move() {
 
 // Left rotates a robot 90 degrees to the left without changing its position
 func (robot *Robot) Left() {
-	switch robot.Direction {
-	case north:
+	if robot.Direction != north {
+		robot.Direction--
+	} else {
 		robot.Direction = west
-	case south:
-		robot.Direction = east
-	case east:
-		robot.Direction = north
-	case west:
-		robot.Direction = south
 	}
 }
 
 // Right rotates a robot 90 degrees to the right without changing its position
 func (robot *Robot) Right() {
-	switch robot.Direction {
-	case north:
-		robot.Direction = east
-	case south:
-		robot.Direction = west
-	case east:
-		robot.Direction = south
-	case west:
+	if robot.Direction != west {
+		robot.Direction++
+	} else {
 		robot.Direction = north
 	}
 }
 
 // Report announces the position and direction of a robot
 func (robot *Robot) Report() {
-	fmt.Println("Position X:", robot.Position.X, "\n", "Position Y:", robot.Position.Y, "\n", "Direction:", robot.Direction)
+	fmt.Println("Position X:", robot.Position.X, "\n", "Position Y:", robot.Position.Y, "\n", "Direction:", robot.Direction.String())
 }
