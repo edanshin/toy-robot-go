@@ -7,8 +7,8 @@ type Table struct {
 
 // Dimensions of table
 type Dimensions struct {
-	x int
-	y int
+	X int
+	Y int
 }
 
 // NewTable creates a new table
@@ -23,8 +23,8 @@ func NewTable(width, length int) Table {
 
 	table := Table{
 		dimensions: Dimensions{
-			x: width,
-			y: length,
+			X: width,
+			Y: length,
 		},
 	}
 
