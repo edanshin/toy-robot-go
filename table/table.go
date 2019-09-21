@@ -13,12 +13,12 @@ type Dimensions struct {
 
 // NewTable creates a new table
 func NewTable(width, length int) Table {
-	if width < 2 {
-		width = 5
+	if width < 1 {
+		width = 4
 	}
 
-	if length < 2 {
-		length = 5
+	if length < 1 {
+		length = 4
 	}
 
 	table := Table{
