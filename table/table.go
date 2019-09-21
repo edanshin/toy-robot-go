@@ -5,7 +5,7 @@ type Table struct {
 	dimensions Dimensions
 }
 
-// Dimensions of table
+// Dimensions of a table
 type Dimensions struct {
 	X int
 	Y int
