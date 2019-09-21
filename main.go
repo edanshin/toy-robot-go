@@ -9,27 +9,52 @@ import (
 	"strings"
 
 	"./robot"
+	"./table"
 )
 
 func main() {
 	var aRobot robot.Robot
 
-	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
+	for {
 		fmt.Print("Command: ")
 
+		scanner := bufio.NewScanner(os.Stdin)
+
+		if !scanner.Scan() {
+			continue
+		}
+
 		command := strings.ToUpper(scanner.Text())
+		cmd := strings.Split(command, " ")
+		cmd = strings.Split(cmd[1], ",")
+
+		x, _ := strconv.Atoi(cmd[0])
+		y, _ := strconv.Atoi(cmd[1])
+
+		var direction robot.Direction
+
+		switch cmd[2] {
+		case "NORTH":
+			direction = robot.North
+		case "EAST":
+			direction = robot.East
+		case "SOUTH":
+			direction = robot.South
+		case "WEST":
+			direction = robot.West
+		}
+
+		table := table.NewTable(5, 5)
 
 		regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
 		if regex {
-			cmd := strings.Split(command, " ")
-			cmd = strings.Split(cmd[1], ",")
-
-			x, _ := strconv.Atoi(cmd[0])
-			y, _ := strconv.Atoi(cmd[1])
-			direction := cmd[2]
+			// make sure our new robot's position is within the table surface
+			if x > table.Dimensions.X || y > table.Dimensions.Y {
+				continue
+			}
 
 			aRobot = robot.Place(robot.Position{X: x, Y: y}, direction)
+			aRobot.Report()
 		}
 
 		switch command {
@@ -41,8 +66,8 @@ func main() {
 			aRobot.Right()
 		case "REPORT":
 			aRobot.Report()
-		default:
-			fmt.Println("Invalid command entered.")
+
+			// fmt.Println("Invalid command entered.")
 		}
 	}
 }
