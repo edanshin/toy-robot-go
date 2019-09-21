@@ -3,18 +3,19 @@ package robot
 import "fmt"
 
 const (
-	north direction = 0
-	east  direction = 1
-	south direction = 2
-	west  direction = 3
+	north Direction = 0
+	east  Direction = 1
+	south Direction = 2
+	west  Direction = 3
 )
 
-type direction int
+// Direction defines current direction the robot currently faces
+type Direction int
 
 // Robot .
 type Robot struct {
 	Position  Position
-	Direction direction
+	Direction Direction
 }
 
 // Position of a robot .
@@ -23,7 +24,7 @@ type Position struct {
 	Y int
 }
 
-func (direction direction) String() string {
+func (direction Direction) String() string {
 	// declare an array of directions
 	directions := []string{
 		"NORTH",
@@ -36,7 +37,7 @@ func (direction direction) String() string {
 }
 
 // Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
-func Place(position Position, direction direction) Robot {
+func Place(position Position, direction Direction) Robot {
 	robot := Robot{
 		Position:  position,
 		Direction: direction,
