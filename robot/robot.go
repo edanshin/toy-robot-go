@@ -12,12 +12,6 @@ type Position struct {
 	Y int
 }
 
-func direction() []string {
-	return []string{
-		"NORTH", "EAST", "SOUTH", "WEST",
-	}
-}
-
 // Place will put a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
 func Place(position Position, direction string) Robot {
 	robot := Robot{
