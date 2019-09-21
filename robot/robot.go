@@ -12,7 +12,7 @@ type Position struct {
 	Y int
 }
 
-// Place will put a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
+// Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
 func Place(position Position, direction string) Robot {
 	robot := Robot{
 		Position:  position,
@@ -22,7 +22,7 @@ func Place(position Position, direction string) Robot {
 	return robot
 }
 
-// Move will move a toy robot one unit forward in the direction it is currently facing
+// Move moves a toy robot one unit forward in the direction it is currently facing
 func (robot *Robot) Move() {
 	switch robot.Direction {
 	case "NORTH":
@@ -36,17 +36,17 @@ func (robot *Robot) Move() {
 	}
 }
 
-// Left will rotate a robot 90 degrees to the left without changing its position
+// Left rotates a robot 90 degrees to the left without changing its position
 func (robot *Robot) Left() {
 
 }
 
-// Right will rotate a robot 90 degrees to the right without changing its position
+// Right rotates a robot 90 degrees to the right without changing its position
 func (robot *Robot) Right() {
 
 }
 
-// Report will announce the position and direction of a robot
+// Report announces the position and direction of a robot
 func (robot *Robot) Report() {
 
 }
