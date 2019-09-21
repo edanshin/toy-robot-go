@@ -87,5 +87,5 @@ func (robot *Robot) Right() {
 
 // Report announces the position and direction of a robot
 func (robot *Robot) Report() {
-	fmt.Println("Position X:", robot.Position.X, "\n", "Position Y:", robot.Position.Y, "\n", "Direction:", robot.Direction.String())
+	fmt.Println("\n", "Position X:", robot.Position.X, "\n", "Position Y:", robot.Position.Y, "\n", "Direction:", robot.Direction.String()+"\n")
 }
