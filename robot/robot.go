@@ -3,10 +3,17 @@ package robot
 import "fmt"
 
 const (
-	north Direction = 0
-	east  Direction = 1
-	south Direction = 2
-	west  Direction = 3
+	// North Direction
+	North Direction = 0
+
+	// East  Direction
+	East Direction = 1
+
+	// South Direction
+	South Direction = 2
+
+	// West  Direction
+	West Direction = 3
 )
 
 // Direction defines current direction the robot currently faces
@@ -49,32 +56,32 @@ func Place(position Position, direction Direction) Robot {
 // Move moves a toy robot one unit forward in the direction it is currently facing
 func (robot *Robot) Move() {
 	switch robot.Direction {
-	case north:
+	case North:
 		robot.Position.Y++
-	case south:
+	case South:
 		robot.Position.Y--
-	case east:
+	case East:
 		robot.Position.X++
-	case west:
+	case West:
 		robot.Position.X--
 	}
 }
 
 // Left rotates a robot 90 degrees to the left without changing its position
 func (robot *Robot) Left() {
-	if robot.Direction != north {
+	if robot.Direction != North {
 		robot.Direction--
 	} else {
-		robot.Direction = west
+		robot.Direction = West
 	}
 }
 
 // Right rotates a robot 90 degrees to the right without changing its position
 func (robot *Robot) Right() {
-	if robot.Direction != west {
+	if robot.Direction != West {
 		robot.Direction++
 	} else {
-		robot.Direction = north
+		robot.Direction = North
 	}
 }
 
