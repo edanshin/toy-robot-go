@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	var rbt robot.Robot
+	var aRobot robot.Robot
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
@@ -29,18 +29,18 @@ func main() {
 			y, _ := strconv.Atoi(cmd[1])
 			direction := cmd[2]
 
-			rbt = robot.Place(robot.Position{X: x, Y: y}, direction)
+			aRobot = robot.Place(robot.Position{X: x, Y: y}, direction)
 		}
 
 		switch command {
 		case "MOVE":
-			rbt.Move()
+			aRobot.Move()
 		case "LEFT":
-			rbt.Left()
+			aRobot.Left()
 		case "RIGHT":
-			rbt.Right()
+			aRobot.Right()
 		case "REPORT":
-			rbt.Report()
+			aRobot.Report()
 		default:
 			fmt.Println("Invalid command entered.")
 		}
