@@ -2,7 +2,7 @@ package table
 
 // Table .
 type Table struct {
-	dimensions Dimensions
+	Dimensions Dimensions
 }
 
 // Dimensions of a table
@@ -22,7 +22,7 @@ func NewTable(width, length int) Table {
 	}
 
 	table := Table{
-		dimensions: Dimensions{
+		Dimensions: Dimensions{
 			X: width,
 			Y: length,
 		},
