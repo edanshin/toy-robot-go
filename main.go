@@ -17,7 +17,7 @@ func main() {
 	table := table.NewTable(5, 5)
 
 	for {
-		fmt.Print("Command: ")
+		fmt.Print("Robot: ")
 
 		scanner := bufio.NewScanner(os.Stdin)
 
