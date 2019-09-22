@@ -103,3 +103,26 @@ func (robot *Robot) Right() {
 func (robot *Robot) Report() {
 	fmt.Println("\n", "Position X:", robot.Position.X, "\n", "Position Y:", robot.Position.Y, "\n", "Direction:", robot.Direction.String()+"\n")
 }
+
+// Display outputs the current view of the robot on the table to console
+func (robot *Robot) Display(table table.Table) {
+	// graphical direction
+	dir := [...]string{"^", ">", "v", "<"}
+	fmt.Println()
+
+	for y := table.Dimensions.Y - 1; y >= 0; y-- {
+		data := ""
+
+		for x := 0; x < table.Dimensions.X; x++ {
+			if robot.Position.X == x && robot.Position.Y == y {
+				data += dir[robot.Direction] + " "
+			} else {
+				data += "o "
+			}
+		}
+
+		fmt.Println(data)
+	}
+
+	fmt.Println()
+}
