@@ -48,26 +48,36 @@ func (direction Direction) String() string {
 }
 
 // Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
-func Place(position Position, direction Direction) Robot {
-	robot := Robot{
+func Place(position Position, direction Direction, table table.Table) *Robot {
+	if position.X > table.Dimensions.X || position.Y > table.Dimensions.Y || position.X < 0 || position.Y < 0 {
+		return nil
+	}
+
+	return &Robot{
 		Position:  position,
 		Direction: direction,
 	}
-
-	return robot
 }
 
 // Move moves a toy robot one unit forward in the direction it is currently facing
-func (robot *Robot) Move() {
+func (robot *Robot) Move(table table.Table) {
 	switch robot.Direction {
 	case North:
-		robot.Position.Y++
+		if robot.Position.Y < table.Dimensions.Y {
+			robot.Position.Y++
+		}
 	case South:
-		robot.Position.Y--
+		if robot.Position.Y > 0 {
+			robot.Position.Y--
+		}
 	case East:
-		robot.Position.X++
+		if robot.Position.X < table.Dimensions.X {
+			robot.Position.X++
+		}
 	case West:
-		robot.Position.X--
+		if robot.Position.X > 0 {
+			robot.Position.X--
+		}
 	}
 }
 
@@ -92,13 +102,4 @@ func (robot *Robot) Right() {
 // Report announces the position and direction of a robot
 func (robot *Robot) Report() {
 	fmt.Println("\n", "Position X:", robot.Position.X, "\n", "Position Y:", robot.Position.Y, "\n", "Direction:", robot.Direction.String()+"\n")
-}
-
-// IsRobotOnTable checks if the robot is positioned within the table surface
-func (robot *Robot) IsRobotOnTable(table table.Table) bool {
-	if robot.Position.X > table.Dimensions.X || robot.Position.Y > table.Dimensions.Y || robot.Position.X < 0 || robot.Position.Y < 0 {
-		return false
-	}
-
-	return true
 }
