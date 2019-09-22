@@ -49,7 +49,7 @@ func (direction Direction) String() string {
 
 // Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
 func Place(position Position, direction Direction, table table.Table) *Robot {
-	if position.X > table.Dimensions.X || position.Y > table.Dimensions.Y || position.X < 0 || position.Y < 0 {
+	if position.X > table.Dimensions.X-1 || position.Y > table.Dimensions.Y-1 || position.X < 0 || position.Y < 0 {
 		return nil
 	}
 
@@ -63,7 +63,7 @@ func Place(position Position, direction Direction, table table.Table) *Robot {
 func (robot *Robot) Move(table table.Table) {
 	switch robot.Direction {
 	case North:
-		if robot.Position.Y < table.Dimensions.Y {
+		if robot.Position.Y < table.Dimensions.Y-1 {
 			robot.Position.Y++
 		}
 	case South:
@@ -71,7 +71,7 @@ func (robot *Robot) Move(table table.Table) {
 			robot.Position.Y--
 		}
 	case East:
-		if robot.Position.X < table.Dimensions.X {
+		if robot.Position.X < table.Dimensions.X-1 {
 			robot.Position.X++
 		}
 	case West:
