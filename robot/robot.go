@@ -102,9 +102,14 @@ func (robot *Robot) Right() {
 	}
 }
 
-// Report announces the position and direction of a robot
+// Report announces current position and direction of the robot on the table
 func (robot *Robot) Report() {
-	fmt.Println("\n", "Position X:", robot.Position.X, "\n", "Position Y:", robot.Position.Y, "\n", "Direction:", robot.Direction.String()+"\n")
+	fmt.Println("\n", robot.Setting()+"\n")
+}
+
+// Setting returns current position and direction of the robot on the table
+func (robot *Robot) Setting() string {
+	return fmt.Sprint(robot.Position.X, robot.Position.Y, robot.Direction.String())
 }
 
 // Display outputs the current view of the robot on the table to console
