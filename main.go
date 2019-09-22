@@ -60,8 +60,6 @@ func main() {
 			if !robotCreated {
 				robotCreated = true
 			}
-
-			aRobot.Report()
 		} else if robotCreated {
 			switch command {
 			case "MOVE":
