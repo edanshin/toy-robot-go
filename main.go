@@ -48,9 +48,15 @@ func main() {
 				direction = robot.West
 			}
 
+			// if an invalid place command is entered, get the previous valid robot
+			rbt := aRobot
 			aRobot = robot.Place(robot.Position{X: x, Y: y}, direction, table)
 
-			if aRobot == nil {
+			if aRobot == nil && rbt != nil {
+				aRobot = rbt
+			}
+
+			if aRobot == nil && rbt == nil {
 				continue
 			}
 		} else if aRobot != nil {
