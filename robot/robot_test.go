@@ -77,13 +77,55 @@ func TestRight(t *testing.T) {
 }
 
 func TestCaseA(t *testing.T) {
+	var aRobot *Robot
+	table := table.NewTable(5, 5)
+	commands := []string{"PLACE 0,0,NORTH", "MOVE", "REPORT"}
 
+	for _, command := range commands {
+		aRobot = Process(command, aRobot, table)
+	}
+
+	if aRobot == nil {
+		t.Error("")
+	}
+
+	if aRobot.Setting() != "0,1,NORTH" {
+		t.Error("")
+	}
 }
 
 func TestCaseB(t *testing.T) {
+	var aRobot *Robot
+	table := table.NewTable(5, 5)
+	commands := []string{"PLACE 0,0,NORTH", "LEFT", "REPORT"}
 
+	for _, command := range commands {
+		aRobot = Process(command, aRobot, table)
+	}
+
+	if aRobot == nil {
+		t.Error("")
+	}
+
+	if aRobot.Setting() != "0,0,WEST" {
+		t.Error("")
+	}
 }
 
 func TestCaseC(t *testing.T) {
+	var aRobot *Robot
+	table := table.NewTable(5, 5)
+	commands := []string{"PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"}
 
+	for _, command := range commands {
+		aRobot = Process(command, aRobot, table)
+	}
+
+	if aRobot == nil {
+		t.Error("")
+	}
+
+	if aRobot.Setting() != "3,3,NORTH" {
+		t.Error("")
+	}
 }
