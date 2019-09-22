@@ -13,6 +13,7 @@ type Dimensions struct {
 
 // NewTable creates a new table
 func NewTable(width, length int) Table {
+	// set default width and height, in case they are too small
 	if width < 2 {
 		width = 5
 	}
@@ -21,12 +22,10 @@ func NewTable(width, length int) Table {
 		length = 5
 	}
 
-	table := Table{
+	return Table{
 		Dimensions: Dimensions{
 			X: width,
 			Y: length,
 		},
 	}
-
-	return table
 }
