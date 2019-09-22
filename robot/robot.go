@@ -1,6 +1,10 @@
 package robot
 
-import "fmt"
+import (
+	"fmt"
+
+	"../table"
+)
 
 const (
 	// North Direction
@@ -88,4 +92,13 @@ func (robot *Robot) Right() {
 // Report announces the position and direction of a robot
 func (robot *Robot) Report() {
 	fmt.Println("\n", "Position X:", robot.Position.X, "\n", "Position Y:", robot.Position.Y, "\n", "Direction:", robot.Direction.String()+"\n")
+}
+
+// IsRobotOnTable checks if the robot is positioned within the table surface
+func (robot *Robot) IsRobotOnTable(table table.Table) bool {
+	if robot.Position.X > table.Dimensions.X || robot.Position.Y > table.Dimensions.Y || robot.Position.X < 0 || robot.Position.Y < 0 {
+		return false
+	}
+
+	return true
 }
