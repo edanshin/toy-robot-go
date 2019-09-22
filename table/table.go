@@ -22,6 +22,15 @@ func NewTable(width, length int) Table {
 		length = 5
 	}
 
+	// limit table's maximum width and length
+	if width > 10 {
+		width = 10
+	}
+
+	if length > 10 {
+		length = 10
+	}
+
 	return Table{
 		Dimensions: Dimensions{
 			X: width,
