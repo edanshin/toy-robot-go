@@ -2,6 +2,9 @@ package robot
 
 import (
 	"fmt"
+	"regexp"
+	"strconv"
+	"strings"
 
 	"../table"
 )
@@ -20,7 +23,7 @@ const (
 	West Direction = 3
 )
 
-// Direction defines current direction the robot currently faces
+// Direction defines direction the robot currently faces
 type Direction int
 
 // Robot .
@@ -125,4 +128,58 @@ func (robot *Robot) Display(table table.Table) {
 	}
 
 	fmt.Println()
+}
+
+// Process processes commands given to robot
+func Process(command string, aRobot *Robot, table table.Table) *Robot {
+	regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
+	if regex {
+		cmd := strings.Split(command, " ")
+		cmd = strings.Split(cmd[1], ",")
+
+		x, _ := strconv.Atoi(cmd[0])
+		y, _ := strconv.Atoi(cmd[1])
+
+		var direction Direction
+
+		switch cmd[2] {
+		case "NORTH":
+			direction = North
+		case "EAST":
+			direction = East
+		case "SOUTH":
+			direction = South
+		case "WEST":
+			direction = West
+		}
+
+		// if an invalid place command is entered, get the previous valid robot
+		rbt := aRobot
+		aRobot = Place(Position{X: x, Y: y}, direction, table)
+
+		if aRobot == nil && rbt != nil {
+			aRobot = rbt
+		}
+
+		//if aRobot == nil && rbt == nil {
+		//	continue
+		//}
+
+		aRobot.Display(table)
+	} else if aRobot != nil {
+		switch command {
+		case "MOVE":
+			aRobot.Move(table)
+		case "LEFT":
+			aRobot.Left()
+		case "RIGHT":
+			aRobot.Right()
+		case "REPORT":
+			aRobot.Report()
+
+			// fmt.Println("Invalid command entered.")
+		}
+	}
+
+	return aRobot
 }
