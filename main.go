@@ -62,7 +62,7 @@ func main() {
 			}
 
 			aRobot.Report()
-		} else {
+		} else if robotCreated {
 			switch command {
 			case "MOVE":
 				aRobot.Move()
