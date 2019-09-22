@@ -13,9 +13,8 @@ import (
 )
 
 func main() {
-	var aRobot robot.Robot
+	var aRobot *robot.Robot
 	table := table.NewTable(5, 5)
-	robotCreated := false
 
 	for {
 		fmt.Print("Command: ")
@@ -49,23 +48,15 @@ func main() {
 				direction = robot.West
 			}
 
-			aRobot = robot.Place(robot.Position{X: x, Y: y}, direction)
+			aRobot = robot.Place(robot.Position{X: x, Y: y}, direction, table)
 
-			// make sure our new robot's position is within the table surface
-			if !aRobot.IsRobotOnTable(table) {
-				aRobot = robot.Robot{}
+			if aRobot == nil {
 				continue
 			}
-
-			if !robotCreated {
-				robotCreated = true
-			}
-		} else if robotCreated {
+		} else if aRobot != nil {
 			switch command {
 			case "MOVE":
-				if aRobot.IsRobotOnTable(table) {
-					aRobot.Move()
-				}
+				aRobot.Move(table)
 			case "LEFT":
 				aRobot.Left()
 			case "RIGHT":
