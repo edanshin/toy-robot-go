@@ -18,32 +18,29 @@ func main() {
 	if len(os.Args) == 2 {
 		file, err := os.Open(os.Args[1])
 
-		if err != nil {
-			return
-		}
+		if err == nil {
+			defer file.Close()
+			scanner := bufio.NewScanner(file)
 
-		defer file.Close()
-		scanner := bufio.NewScanner(file)
-
-		for scanner.Scan() {
-			command := strings.ToUpper(scanner.Text())
-			// output each command to terminal
-			fmt.Println(command)
-			aRobot = robot.Process(command, aRobot, table)
-		}
-	} else if len(os.Args) == 1 {
-		// if no arguments are provided, execute commands entered via standard console input
-		for {
-			fmt.Print("Robot: ")
-
-			scanner := bufio.NewScanner(os.Stdin)
-
-			if !scanner.Scan() {
-				continue
+			for scanner.Scan() {
+				command := strings.ToUpper(scanner.Text())
+				// output each command to terminal
+				fmt.Println(command)
+				aRobot = robot.Process(command, aRobot, table)
 			}
-
-			command := strings.ToUpper(scanner.Text())
-			aRobot = robot.Process(command, aRobot, table)
 		}
+	}
+
+	// execute commands entered via standard console input
+	for {
+		fmt.Print("Robot: ")
+		scanner := bufio.NewScanner(os.Stdin)
+
+		if !scanner.Scan() {
+			continue
+		}
+
+		command := strings.ToUpper(scanner.Text())
+		aRobot = robot.Process(command, aRobot, table)
 	}
 }
