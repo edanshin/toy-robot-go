@@ -26,7 +26,7 @@ The application can read commands of the following (textual) form:
 - RIGHT - rotates the robot 90 degrees to the right
   without changing the position of the robot.
 
-- REPORT - announces the X,Y and F (direction) of the robot.
+- REPORT - announces the X,Y position and F (direction) of the robot.
 
 ### Conditions
 - The first valid command to the robot is a valid PLACE command, after that, any
@@ -43,11 +43,16 @@ The application can read commands of the following (textual) form:
 - Test data to exercise the application is provided in the form of unit tests
 (robot/robot_test.go).
 
+- To run all unit tests, execute command "go test -v" in the "robot" folder.
+- To check test coverage, execute command "go test -v -cover" in the "robot" folder.
+- To run an individual unit test, execute command "go test -run [function name]" in the "robot" folder.
+
+### Test coverage
+Current test coverage of the program: 83.9% of statements.
+
 ### Input
 Input is possible via standard console input as well as via file input.
 Commands will be converted to uppercase automatically and are not case sensitive.
-If text file with commands is not found or is empty, input mode will switch
-to standard console input.
 
 ### Output
 The program has the ability to output graphical representation of a tabletop
@@ -64,11 +69,13 @@ Object-oriented approach has been used for the development of this application.
 ### Development tools
    1) Go 1.13
    2) VS Code
+   3) Git
 
 ### Build and run the program
-- Pre-compiled version of the program is provided.
-- To build the app, execute "go build" command in the app folder.
-- To run the app, execute "./toy-robot" command in the app folder.
-- To run the app with predefined commands, execute "./toy-robot [commands file path]"
+- To run the app, execute "go run main.go" command in the app folder.
+
+- To run the app with predefined commands, execute "go run main.go [commands file path]"
 command in the app folder. The commands file should be a text file with a list of commands,
 delimited by new line.
+
+- To build the app, execute "go build" command in the app folder.
