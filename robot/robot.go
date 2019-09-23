@@ -1,3 +1,4 @@
+// Package robot describes a toy robot
 package robot
 
 import (
