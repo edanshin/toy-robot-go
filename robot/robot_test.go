@@ -6,6 +6,7 @@ import (
 	"../table"
 )
 
+// TestPlace tests robot's PLACE command
 func TestPlace(t *testing.T) {
 	var aRobot *Robot
 	table := table.NewTable(5, 5)
@@ -22,6 +23,7 @@ func TestPlace(t *testing.T) {
 	}
 }
 
+// TestMove tests robot's MOVE command
 func TestMove(t *testing.T) {
 	var aRobot *Robot
 	table := table.NewTable(5, 5)
@@ -40,6 +42,7 @@ func TestMove(t *testing.T) {
 	}
 }
 
+// TestLeft tests robot's LEFT command
 func TestLeft(t *testing.T) {
 	var aRobot *Robot
 	table := table.NewTable(5, 5)
@@ -58,6 +61,7 @@ func TestLeft(t *testing.T) {
 	}
 }
 
+// TestRight tests robot's RIGHT command
 func TestRight(t *testing.T) {
 	var aRobot *Robot
 	table := table.NewTable(5, 5)
@@ -76,6 +80,7 @@ func TestRight(t *testing.T) {
 	}
 }
 
+// TestCaseA tests Example a from problem description
 func TestCaseA(t *testing.T) {
 	var aRobot *Robot
 	table := table.NewTable(5, 5)
@@ -94,6 +99,7 @@ func TestCaseA(t *testing.T) {
 	}
 }
 
+// TestCaseB tests Example b from problem description
 func TestCaseB(t *testing.T) {
 	var aRobot *Robot
 	table := table.NewTable(5, 5)
@@ -112,6 +118,7 @@ func TestCaseB(t *testing.T) {
 	}
 }
 
+// TestCaseC tests Example c from problem description
 func TestCaseC(t *testing.T) {
 	var aRobot *Robot
 	table := table.NewTable(5, 5)
