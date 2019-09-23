@@ -38,6 +38,7 @@ type Position struct {
 	Y int
 }
 
+// enumerate directions
 func (direction Direction) String() string {
 	// declare an array of directions
 	directions := []string{
@@ -52,6 +53,7 @@ func (direction Direction) String() string {
 
 // Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
 func Place(position Position, direction Direction, table table.Table) *Robot {
+	// if robot's position is not within the table, return nil
 	if position.X > table.Dimensions.X-1 || position.Y > table.Dimensions.Y-1 || position.X < 0 || position.Y < 0 {
 		return nil
 	}
@@ -64,6 +66,8 @@ func Place(position Position, direction Direction, table table.Table) *Robot {
 
 // Move moves a toy robot one unit forward in the direction it is currently facing
 func (robot *Robot) Move(table table.Table) {
+	// move the robot 1 step in the direction it currently faces,
+	// only if it won't exceed table dimensions
 	switch robot.Direction {
 	case North:
 		if robot.Position.Y < table.Dimensions.Y-1 {
@@ -89,6 +93,8 @@ func (robot *Robot) Left() {
 	if robot.Direction != North {
 		robot.Direction--
 	} else {
+		// if robot currently faces north, set its direction to west,
+		// to keep direction's number within the valid range
 		robot.Direction = West
 	}
 }
@@ -98,6 +104,8 @@ func (robot *Robot) Right() {
 	if robot.Direction != West {
 		robot.Direction++
 	} else {
+		// if robot currently faces west, set its direction to north,
+		// to keep direction's number within the valid range
 		robot.Direction = North
 	}
 }
@@ -118,10 +126,14 @@ func (robot *Robot) Display(table table.Table) {
 	dir := [...]string{"^", ">", "v", "<"}
 	fmt.Println()
 
+	// navigate through table dimensions
 	for y := table.Dimensions.Y - 1; y >= 0; y-- {
 		data := ""
 
 		for x := 0; x < table.Dimensions.X; x++ {
+
+			// if robot's position equals table's coordinate, show robot's direction,
+			// otherwise display table's standard empty field
 			if robot.Position.X == x && robot.Position.Y == y {
 				data += dir[robot.Direction] + " "
 			} else {
@@ -137,14 +149,18 @@ func (robot *Robot) Display(table table.Table) {
 
 // Process processes commands given to robot
 func Process(command string, aRobot *Robot, table table.Table) *Robot {
+	// check if submitted command is a valid PLACE command
 	regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
 	if regex {
+		// get command's parameters
 		cmd := strings.Split(command, " ")
 		cmd = strings.Split(cmd[1], ",")
 
+		// get command's coordinate
 		x, _ := strconv.Atoi(cmd[0])
 		y, _ := strconv.Atoi(cmd[1])
 
+		// extract direction
 		var direction Direction
 
 		switch cmd[2] {
@@ -171,6 +187,7 @@ func Process(command string, aRobot *Robot, table table.Table) *Robot {
 		//}
 	} else if aRobot != nil {
 		switch command {
+		// if robot is valid, allow execution of the rest of valid commands
 		case "MOVE":
 			aRobot.Move(table)
 		case "LEFT":
