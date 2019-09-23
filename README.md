@@ -53,6 +53,7 @@ Current test coverage of the program: 83.9% of statements.
 ### Input
 Input is possible via standard console input as well as via file input.
 Commands will be converted to uppercase automatically and are not case sensitive.
+- The app allows to execute commands manually after a successful or unsuccessful text file reading.
 
 ### Output
 The program has the ability to output graphical representation of a tabletop
