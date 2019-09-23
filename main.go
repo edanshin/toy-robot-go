@@ -27,6 +27,8 @@ func main() {
 
 		for scanner.Scan() {
 			command := strings.ToUpper(scanner.Text())
+			// output each command to terminal
+			fmt.Println(command)
 			aRobot = robot.Process(command, aRobot, table)
 		}
 	} else if len(os.Args) == 1 {
