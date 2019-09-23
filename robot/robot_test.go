@@ -20,6 +20,8 @@ func TestPlace(t *testing.T) {
 
 	if aRobot.Setting() != "2,3,EAST" {
 		t.Error("PLACE command test failed, expected output 2,3,EAST, got ", aRobot.Setting())
+	} else {
+		t.Log("PLACE command test successful, got ", aRobot.Setting())
 	}
 }
 
@@ -39,6 +41,8 @@ func TestMove(t *testing.T) {
 
 	if aRobot.Setting() != "3,3,EAST" {
 		t.Error("MOVE command test failed, expected output 3,3,EAST, got ", aRobot.Setting())
+	} else {
+		t.Log("MOVE command test successful, got ", aRobot.Setting())
 	}
 }
 
@@ -58,6 +62,8 @@ func TestLeft(t *testing.T) {
 
 	if aRobot.Setting() != "2,3,NORTH" {
 		t.Error("LEFT command test failed, expected output 2,3,NORTH, got ", aRobot.Setting())
+	} else {
+		t.Log("LEFT command test successful, got ", aRobot.Setting())
 	}
 }
 
@@ -77,6 +83,8 @@ func TestRight(t *testing.T) {
 
 	if aRobot.Setting() != "2,3,SOUTH" {
 		t.Error("RIGHT command test failed, expected output 2,3,SOUTH, got ", aRobot.Setting())
+	} else {
+		t.Log("RIGHT command test successful, got ", aRobot.Setting())
 	}
 }
 
@@ -96,6 +104,8 @@ func TestCaseA(t *testing.T) {
 
 	if aRobot.Setting() != "0,1,NORTH" {
 		t.Error("Example a test failed, expected output 0,1,NORTH, got ", aRobot.Setting())
+	} else {
+		t.Log("Example a test successful, got ", aRobot.Setting())
 	}
 }
 
@@ -115,6 +125,8 @@ func TestCaseB(t *testing.T) {
 
 	if aRobot.Setting() != "0,0,WEST" {
 		t.Error("Example b test failed, expected output 0,0,WEST, got ", aRobot.Setting())
+	} else {
+		t.Log("Example b test successful, got ", aRobot.Setting())
 	}
 }
 
@@ -134,5 +146,7 @@ func TestCaseC(t *testing.T) {
 
 	if aRobot.Setting() != "3,3,NORTH" {
 		t.Error("Example c test failed, expected output 3,3,NORTH, got ", aRobot.Setting())
+	} else {
+		t.Log("Example c test successful, got ", aRobot.Setting())
 	}
 }
