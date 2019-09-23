@@ -169,8 +169,6 @@ func Process(command string, aRobot *Robot, table table.Table) *Robot {
 		//if aRobot == nil && rbt == nil {
 		//	continue
 		//}
-
-		aRobot.Display(table)
 	} else if aRobot != nil {
 		switch command {
 		case "MOVE":
@@ -181,7 +179,7 @@ func Process(command string, aRobot *Robot, table table.Table) *Robot {
 			aRobot.Right()
 		case "REPORT":
 			aRobot.Report()
-
+			aRobot.Display(table)
 			// fmt.Println("Invalid command entered.")
 		}
 	}
