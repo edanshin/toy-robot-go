@@ -14,16 +14,32 @@ func main() {
 	var aRobot *robot.Robot
 	table := table.NewTable(5, 5)
 
-	for {
-		fmt.Print("Robot: ")
+	if len(os.Args) == 2 {
+		file, err := os.Open(os.Args[1])
 
-		scanner := bufio.NewScanner(os.Stdin)
-
-		if !scanner.Scan() {
-			continue
+		if err != nil {
+			return
 		}
 
-		command := strings.ToUpper(scanner.Text())
-		aRobot = robot.Process(command, aRobot, table)
+		defer file.Close()
+		scanner := bufio.NewScanner(file)
+
+		for scanner.Scan() {
+			command := strings.ToUpper(scanner.Text())
+			aRobot = robot.Process(command, aRobot, table)
+		}
+	} else if len(os.Args) == 1 {
+		for {
+			fmt.Print("Robot: ")
+
+			scanner := bufio.NewScanner(os.Stdin)
+
+			if !scanner.Scan() {
+				continue
+			}
+
+			command := strings.ToUpper(scanner.Text())
+			aRobot = robot.Process(command, aRobot, table)
+		}
 	}
 }
