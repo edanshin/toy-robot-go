@@ -15,11 +15,11 @@ func TestPlace(t *testing.T) {
 	aRobot = Process(command, aRobot, table)
 
 	if aRobot == nil {
-		t.Error("")
+		t.Error("PLACE command test failed.")
 	}
 
 	if aRobot.Setting() != "2,3,EAST" {
-		t.Error("")
+		t.Error("PLACE command test failed, expected output 2,3,EAST.")
 	}
 }
 
@@ -34,11 +34,11 @@ func TestMove(t *testing.T) {
 	}
 
 	if aRobot == nil {
-		t.Error("")
+		t.Error("MOVE command test failed.")
 	}
 
 	if aRobot.Setting() != "3,3,EAST" {
-		t.Error("")
+		t.Error("MOVE command test failed, expected output 3,3,EAST.")
 	}
 }
 
@@ -53,11 +53,11 @@ func TestLeft(t *testing.T) {
 	}
 
 	if aRobot == nil {
-		t.Error("")
+		t.Error("LEFT command test failed.")
 	}
 
 	if aRobot.Setting() != "2,3,NORTH" {
-		t.Error("")
+		t.Error("LEFT command test failed, expected output 2,3,NORTH.")
 	}
 }
 
@@ -72,11 +72,11 @@ func TestRight(t *testing.T) {
 	}
 
 	if aRobot == nil {
-		t.Error("")
+		t.Error("RIGHT command test failed.")
 	}
 
 	if aRobot.Setting() != "2,3,SOUTH" {
-		t.Error("")
+		t.Error("RIGHT command test failed, expected output 2,3,SOUTH.")
 	}
 }
 
@@ -91,11 +91,11 @@ func TestCaseA(t *testing.T) {
 	}
 
 	if aRobot == nil {
-		t.Error("")
+		t.Error("Example a test failed.")
 	}
 
 	if aRobot.Setting() != "0,1,NORTH" {
-		t.Error("")
+		t.Error("Example a test failed, expected output 0,1,NORTH.")
 	}
 }
 
@@ -110,11 +110,11 @@ func TestCaseB(t *testing.T) {
 	}
 
 	if aRobot == nil {
-		t.Error("")
+		t.Error("Example b test failed.")
 	}
 
 	if aRobot.Setting() != "0,0,WEST" {
-		t.Error("")
+		t.Error("Example b test failed, expected output 0,0,WEST.")
 	}
 }
 
@@ -129,10 +129,10 @@ func TestCaseC(t *testing.T) {
 	}
 
 	if aRobot == nil {
-		t.Error("")
+		t.Error("Example c test failed.")
 	}
 
 	if aRobot.Setting() != "3,3,NORTH" {
-		t.Error("")
+		t.Error("Example c test failed, expected output 3,3,NORTH.")
 	}
 }
