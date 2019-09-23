@@ -109,7 +109,7 @@ func (robot *Robot) Report() {
 
 // Setting returns current position and direction of the robot on the table
 func (robot *Robot) Setting() string {
-	return fmt.Sprint(robot.Position.X, robot.Position.Y, robot.Direction.String())
+	return fmt.Sprint(robot.Position.X, ",", robot.Position.Y, ",", robot.Direction.String())
 }
 
 // Display outputs the current view of the robot on the table to console
