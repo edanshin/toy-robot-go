@@ -1,3 +1,4 @@
+// Package table describes a tabletop, where a robot is moving
 package table
 
 // Table .
