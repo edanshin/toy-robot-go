@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 
+	"./processor"
 	"./robot"
 )
 
@@ -30,15 +31,5 @@ func main() {
 	}
 
 	// then execute commands entered via standard console input
-	for {
-		fmt.Print("Robot: ")
-		scanner := bufio.NewScanner(os.Stdin)
-
-		if !scanner.Scan() {
-			continue
-		}
-
-		command := strings.ToUpper(scanner.Text())
-		aRobot = robot.Process(command, aRobot)
-	}
+	processor.ReadConsole(aRobot)
 }
