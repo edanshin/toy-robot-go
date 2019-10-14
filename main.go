@@ -7,12 +7,10 @@ import (
 	"strings"
 
 	"./robot"
-	"./table"
 )
 
 func main() {
 	var aRobot *robot.Robot
-	table := table.NewTable(5, 5)
 
 	// if an argument for a file is provided, try to read and execute commands from the text file
 	if len(os.Args) == 2 {
@@ -26,7 +24,7 @@ func main() {
 				command := strings.ToUpper(scanner.Text())
 				// output each command to terminal
 				fmt.Println(command)
-				aRobot = robot.Process(command, aRobot, table)
+				aRobot = robot.Process(command, aRobot)
 			}
 		}
 	}
@@ -41,6 +39,6 @@ func main() {
 		}
 
 		command := strings.ToUpper(scanner.Text())
-		aRobot = robot.Process(command, aRobot, table)
+		aRobot = robot.Process(command, aRobot)
 	}
 }

@@ -6,8 +6,6 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-
-	"../table"
 )
 
 const (
@@ -22,6 +20,11 @@ const (
 
 	// West  Direction
 	West Direction = 3
+)
+
+const (
+	tableWidth  = 5
+	tableLength = 5
 )
 
 // Direction defines direction the robot currently faces
@@ -53,9 +56,9 @@ func (direction Direction) String() string {
 }
 
 // Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
-func Place(position Position, direction Direction, table table.Table) *Robot {
+func Place(position Position, direction Direction) *Robot {
 	// if robot's position is not within the table, return nil
-	if position.X > table.Dimensions.X-1 || position.Y > table.Dimensions.Y-1 || position.X < 0 || position.Y < 0 {
+	if position.X > tableWidth-1 || position.Y > tableLength-1 || position.X < 0 || position.Y < 0 {
 		return nil
 	}
 
@@ -66,12 +69,12 @@ func Place(position Position, direction Direction, table table.Table) *Robot {
 }
 
 // Move moves a toy robot one unit forward in the direction it is currently facing
-func (robot *Robot) Move(table table.Table) {
+func (robot *Robot) Move() {
 	// move the robot 1 step in the direction it currently faces,
 	// only if it won't exceed table dimensions
 	switch robot.Direction {
 	case North:
-		if robot.Position.Y < table.Dimensions.Y-1 {
+		if robot.Position.Y < tableLength-1 {
 			robot.Position.Y++
 		}
 	case South:
@@ -79,7 +82,7 @@ func (robot *Robot) Move(table table.Table) {
 			robot.Position.Y--
 		}
 	case East:
-		if robot.Position.X < table.Dimensions.X-1 {
+		if robot.Position.X < tableWidth-1 {
 			robot.Position.X++
 		}
 	case West:
@@ -122,16 +125,16 @@ func (robot *Robot) Setting() string {
 }
 
 // Display outputs the current view of the robot on the table to console
-func (robot *Robot) Display(table table.Table) {
+func (robot *Robot) Display() {
 	// graphical direction
 	dir := [...]string{"^", ">", "v", "<"}
 	fmt.Println()
 
 	// navigate through table dimensions
-	for y := table.Dimensions.Y - 1; y >= 0; y-- {
+	for y := tableLength - 1; y >= 0; y-- {
 		data := ""
 
-		for x := 0; x < table.Dimensions.X; x++ {
+		for x := 0; x < tableWidth; x++ {
 
 			// if robot's position equals table's coordinate, show robot's direction,
 			// otherwise display table's standard empty field
@@ -149,7 +152,7 @@ func (robot *Robot) Display(table table.Table) {
 }
 
 // Process processes commands given to robot
-func Process(command string, aRobot *Robot, table table.Table) *Robot {
+func Process(command string, aRobot *Robot) *Robot {
 	// check if submitted command is a valid PLACE command
 	regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
 	if regex {
@@ -177,7 +180,7 @@ func Process(command string, aRobot *Robot, table table.Table) *Robot {
 
 		// if an invalid place command is entered, get the previous valid robot
 		rbt := aRobot
-		aRobot = Place(Position{X: x, Y: y}, direction, table)
+		aRobot = Place(Position{X: x, Y: y}, direction)
 
 		if aRobot == nil && rbt != nil {
 			aRobot = rbt
@@ -190,14 +193,14 @@ func Process(command string, aRobot *Robot, table table.Table) *Robot {
 		switch command {
 		// if robot is valid, allow execution of the rest of valid commands
 		case "MOVE":
-			aRobot.Move(table)
+			aRobot.Move()
 		case "LEFT":
 			aRobot.Left()
 		case "RIGHT":
 			aRobot.Right()
 		case "REPORT":
 			aRobot.Report()
-			aRobot.Display(table)
+			aRobot.Display()
 			// fmt.Println("Invalid command entered.")
 		}
 	}
