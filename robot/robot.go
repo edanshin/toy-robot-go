@@ -3,6 +3,7 @@ package robot
 
 import (
 	"fmt"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -185,10 +186,6 @@ func Process(command string, aRobot *Robot) *Robot {
 		if aRobot == nil && rbt != nil {
 			aRobot = rbt
 		}
-
-		//if aRobot == nil && rbt == nil {
-		//	continue
-		//}
 	} else if aRobot != nil {
 		switch command {
 		// if robot is valid, allow execution of the rest of valid commands
@@ -203,6 +200,8 @@ func Process(command string, aRobot *Robot) *Robot {
 			aRobot.Display()
 			// fmt.Println("Invalid command entered.")
 		}
+	} else if command == "EXIT" {
+		os.Exit(0)
 	}
 
 	return aRobot
