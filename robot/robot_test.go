@@ -6,12 +6,12 @@ import (
 
 // TestPlace tests robot's PLACE command
 func TestPlace(t *testing.T) {
-	var aRobot *Robot
+	var aRobot *Robot = &Robot{}
 	command := "PLACE 2,3,EAST"
 
 	aRobot = Process(command, aRobot)
 
-	if aRobot == nil {
+	if aRobot.Direction.String() == "" {
 		t.Error("PLACE command test failed.")
 	}
 
@@ -24,14 +24,14 @@ func TestPlace(t *testing.T) {
 
 // TestMove tests robot's MOVE command
 func TestMove(t *testing.T) {
-	var aRobot *Robot
+	var aRobot *Robot = &Robot{}
 	commands := []string{"PLACE 2,3,EAST", "MOVE"}
 
 	for _, command := range commands {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot == nil {
+	if aRobot.Direction.String() == "" {
 		t.Error("MOVE command test failed.")
 	}
 
@@ -44,14 +44,14 @@ func TestMove(t *testing.T) {
 
 // TestLeft tests robot's LEFT command
 func TestLeft(t *testing.T) {
-	var aRobot *Robot
+	var aRobot *Robot = &Robot{}
 	commands := []string{"PLACE 2,3,EAST", "LEFT"}
 
 	for _, command := range commands {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot == nil {
+	if aRobot.Direction.String() == "" {
 		t.Error("LEFT command test failed.")
 	}
 
@@ -64,14 +64,14 @@ func TestLeft(t *testing.T) {
 
 // TestRight tests robot's RIGHT command
 func TestRight(t *testing.T) {
-	var aRobot *Robot
+	var aRobot *Robot = &Robot{}
 	commands := []string{"PLACE 2,3,EAST", "RIGHT"}
 
 	for _, command := range commands {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot == nil {
+	if aRobot.Direction.String() == "" {
 		t.Error("RIGHT command test failed.")
 	}
 
@@ -84,14 +84,14 @@ func TestRight(t *testing.T) {
 
 // TestCaseA tests Example a from problem description
 func TestCaseA(t *testing.T) {
-	var aRobot *Robot
+	var aRobot *Robot = &Robot{}
 	commands := []string{"PLACE 0,0,NORTH", "MOVE", "REPORT"}
 
 	for _, command := range commands {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot == nil {
+	if aRobot.Direction.String() == "" {
 		t.Error("Example a test failed.")
 	}
 
@@ -104,14 +104,14 @@ func TestCaseA(t *testing.T) {
 
 // TestCaseB tests Example b from problem description
 func TestCaseB(t *testing.T) {
-	var aRobot *Robot
+	var aRobot *Robot = &Robot{}
 	commands := []string{"PLACE 0,0,NORTH", "LEFT", "REPORT"}
 
 	for _, command := range commands {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot == nil {
+	if aRobot.Direction.String() == "" {
 		t.Error("Example b test failed.")
 	}
 
@@ -124,14 +124,14 @@ func TestCaseB(t *testing.T) {
 
 // TestCaseC tests Example c from problem description
 func TestCaseC(t *testing.T) {
-	var aRobot *Robot
+	var aRobot *Robot = &Robot{}
 	commands := []string{"PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"}
 
 	for _, command := range commands {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot == nil {
+	if aRobot.Direction.String() == "" {
 		t.Error("Example c test failed.")
 	}
 
