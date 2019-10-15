@@ -35,6 +35,7 @@ type Direction int
 type Robot struct {
 	Position  Position
 	Direction Direction
+	Placed    bool
 }
 
 // Position of a robot .
@@ -65,6 +66,7 @@ func Place(position Position, direction Direction, r *Robot) bool {
 
 	r.Position = position
 	r.Direction = direction
+	r.Placed = true
 
 	return true
 }
@@ -117,7 +119,7 @@ func (robot *Robot) Right() {
 
 // Report announces current position and direction of the robot on the table
 func (robot *Robot) Report() {
-	fmt.Println("\n" + robot.Setting() + "\n")
+	fmt.Println("\n" + robot.Setting())
 }
 
 // Setting returns current position and direction of the robot on the table
@@ -184,13 +186,13 @@ func Process(command string, aRobot *Robot) *Robot {
 		} else {
 			fmt.Println("Invalid PLACE command entered.")
 		}
-	} else if command == "MOVE" && aRobot.Direction.String() != "" {
+	} else if command == "MOVE" && aRobot.Placed {
 		aRobot.Move()
-	} else if command == "LEFT" && aRobot.Direction.String() != "" {
+	} else if command == "LEFT" && aRobot.Placed {
 		aRobot.Left()
-	} else if command == "RIGHT" && aRobot.Direction.String() != "" {
+	} else if command == "RIGHT" && aRobot.Placed {
 		aRobot.Right()
-	} else if command == "REPORT" && aRobot.Direction.String() != "" {
+	} else if command == "REPORT" && aRobot.Placed {
 		aRobot.Report()
 		aRobot.Display()
 	} else if command == "EXIT" {
