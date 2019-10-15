@@ -11,7 +11,7 @@ func TestPlace(t *testing.T) {
 
 	aRobot = Process(command, aRobot)
 
-	if aRobot.Direction.String() == "" {
+	if !aRobot.Placed {
 		t.Error("PLACE command test failed.")
 	}
 
@@ -31,7 +31,7 @@ func TestMove(t *testing.T) {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot.Direction.String() == "" {
+	if !aRobot.Placed {
 		t.Error("MOVE command test failed.")
 	}
 
@@ -51,7 +51,7 @@ func TestLeft(t *testing.T) {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot.Direction.String() == "" {
+	if !aRobot.Placed {
 		t.Error("LEFT command test failed.")
 	}
 
@@ -71,7 +71,7 @@ func TestRight(t *testing.T) {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot.Direction.String() == "" {
+	if !aRobot.Placed {
 		t.Error("RIGHT command test failed.")
 	}
 
@@ -91,7 +91,7 @@ func TestCaseA(t *testing.T) {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot.Direction.String() == "" {
+	if !aRobot.Placed {
 		t.Error("Example a test failed.")
 	}
 
@@ -111,7 +111,7 @@ func TestCaseB(t *testing.T) {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot.Direction.String() == "" {
+	if !aRobot.Placed {
 		t.Error("Example b test failed.")
 	}
 
@@ -131,7 +131,7 @@ func TestCaseC(t *testing.T) {
 		aRobot = Process(command, aRobot)
 	}
 
-	if aRobot.Direction.String() == "" {
+	if !aRobot.Placed {
 		t.Error("Example c test failed.")
 	}
 
