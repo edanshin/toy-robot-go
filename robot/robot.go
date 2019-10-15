@@ -197,6 +197,8 @@ func Process(command string, aRobot *Robot) *Robot {
 		aRobot.Display()
 	} else if command == "EXIT" {
 		os.Exit(0)
+	} else if !aRobot.Placed && command != "EXIT" {
+		fmt.Println("Error: robot is not placed.")
 	} else {
 		fmt.Println("Invalid command entered.")
 	}
