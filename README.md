@@ -48,7 +48,7 @@ The application can read commands of the following (textual) form:
 - To run an individual unit test, execute command "go test -run [function name]" in the "robot" folder.
 
 ### Test coverage
-Current test coverage of the program: 83.9% of statements.
+Current test coverage of the program: 78.5% of statements.
 
 ### Input
 Input is possible via standard console input as well as via file input.
