@@ -1,17 +1,17 @@
-package robot
+package processor
 
 import (
 	"testing"
 
-	"../processor"
+	"../robot"
 )
 
 // TestPlace tests robot's PLACE command
 func TestPlace(t *testing.T) {
-	var aRobot *Robot = &Robot{}
+	var aRobot *robot.Robot = &robot.Robot{}
 	command := "PLACE 2,3,EAST"
 
-	aRobot = processor.Process(command, aRobot)
+	aRobot = Process(command, aRobot)
 
 	if !aRobot.Placed {
 		t.Error("PLACE command test failed.")
@@ -26,11 +26,11 @@ func TestPlace(t *testing.T) {
 
 // TestMove tests robot's MOVE command
 func TestMove(t *testing.T) {
-	var aRobot *Robot = &Robot{}
+	var aRobot *robot.Robot = &robot.Robot{}
 	commands := []string{"PLACE 2,3,EAST", "MOVE"}
 
 	for _, command := range commands {
-		aRobot = processor.Process(command, aRobot)
+		aRobot = Process(command, aRobot)
 	}
 
 	if !aRobot.Placed {
@@ -46,11 +46,11 @@ func TestMove(t *testing.T) {
 
 // TestLeft tests robot's LEFT command
 func TestLeft(t *testing.T) {
-	var aRobot *Robot = &Robot{}
+	var aRobot *robot.Robot = &robot.Robot{}
 	commands := []string{"PLACE 2,3,EAST", "LEFT"}
 
 	for _, command := range commands {
-		aRobot = processor.Process(command, aRobot)
+		aRobot = Process(command, aRobot)
 	}
 
 	if !aRobot.Placed {
@@ -66,11 +66,11 @@ func TestLeft(t *testing.T) {
 
 // TestRight tests robot's RIGHT command
 func TestRight(t *testing.T) {
-	var aRobot *Robot = &Robot{}
+	var aRobot *robot.Robot = &robot.Robot{}
 	commands := []string{"PLACE 2,3,EAST", "RIGHT"}
 
 	for _, command := range commands {
-		aRobot = processor.Process(command, aRobot)
+		aRobot = Process(command, aRobot)
 	}
 
 	if !aRobot.Placed {
@@ -86,11 +86,11 @@ func TestRight(t *testing.T) {
 
 // TestCaseA tests Example a from problem description
 func TestCaseA(t *testing.T) {
-	var aRobot *Robot = &Robot{}
+	var aRobot *robot.Robot = &robot.Robot{}
 	commands := []string{"PLACE 0,0,NORTH", "MOVE", "REPORT"}
 
 	for _, command := range commands {
-		aRobot = processor.Process(command, aRobot)
+		aRobot = Process(command, aRobot)
 	}
 
 	if !aRobot.Placed {
@@ -106,11 +106,11 @@ func TestCaseA(t *testing.T) {
 
 // TestCaseB tests Example b from problem description
 func TestCaseB(t *testing.T) {
-	var aRobot *Robot = &Robot{}
+	var aRobot *robot.Robot = &robot.Robot{}
 	commands := []string{"PLACE 0,0,NORTH", "LEFT", "REPORT"}
 
 	for _, command := range commands {
-		aRobot = processor.Process(command, aRobot)
+		aRobot = Process(command, aRobot)
 	}
 
 	if !aRobot.Placed {
@@ -126,11 +126,11 @@ func TestCaseB(t *testing.T) {
 
 // TestCaseC tests Example c from problem description
 func TestCaseC(t *testing.T) {
-	var aRobot *Robot = &Robot{}
+	var aRobot *robot.Robot = &robot.Robot{}
 	commands := []string{"PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"}
 
 	for _, command := range commands {
-		aRobot = processor.Process(command, aRobot)
+		aRobot = Process(command, aRobot)
 	}
 
 	if !aRobot.Placed {
