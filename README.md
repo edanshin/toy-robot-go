@@ -28,6 +28,8 @@ The application can read commands of the following (textual) form:
 
 - REPORT - announces the X,Y position and F (direction) of the robot.
 
+- EXIT - exits the program
+
 ### Conditions
 - The first valid command to the robot is a valid PLACE command, after that, any
   sequence of commands can be issued, in any order, including another PLACE
@@ -41,14 +43,11 @@ The application can read commands of the following (textual) form:
 
 ### Test data
 - Test data to exercise the application is provided in the form of unit tests
-(robot/robot_test.go).
+(processor/processor_test.go).
 
-- To run all unit tests, execute command "go test -v" in the "robot" folder.
-- To check test coverage, execute command "go test -v -cover" in the "robot" folder.
-- To run an individual unit test, execute command "go test -run [function name]" in the "robot" folder.
-
-### Test coverage
-Current test coverage of the program: 78.5% of statements.
+- To run all unit tests, execute command "go test -v" in the "processor" folder.
+- To check test coverage, execute command "go test -v -cover" in the "processor" folder.
+- To run an individual unit test, execute command "go test -run [function name]" in the "processor" folder.
 
 ### Input
 Input is possible via standard console input as well as via file input.
@@ -74,7 +73,7 @@ Object-oriented approach has been used for the development of this application.
 
 - Package "robot" contains all the functions necessary for robot's functionality
 (Place, Move, Left, Right, Report).
-- Package "table" describes a tabletop, where a robot is moving.
+- Package "processor" is responsible for reading and executing commands from console input.
 - The file "main.go" is responsible for program execution.
 
 ### Development tools
