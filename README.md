@@ -43,11 +43,11 @@ The application can read commands of the following (textual) form:
 
 ### Test data
 - Test data to exercise the application is provided in the form of unit tests
-(processor/processor_test.go).
+(src/processor/processor_test.go).
 
-- To run all unit tests, execute command "go test -v" in the "processor" folder.
-- To check test coverage, execute command "go test -v -cover" in the "processor" folder.
-- To run an individual unit test, execute command "go test -run [function name]" in the "processor" folder.
+- To run all unit tests, execute command "go test -v" in the "src/processor" folder.
+- To check test coverage, execute command "go test -v -cover" in the "src/processor" folder.
+- To run an individual unit test, execute command "go test -run [function name]" in the "src/processor" folder.
 
 ### Input
 Input is possible via standard console input as well as via file input.
@@ -82,10 +82,10 @@ Object-oriented approach has been used for the development of this application.
    3) Git
 
 ### Build and run the program
-- To run the app, execute "go run main.go" command in the app folder.
+- To run the app, execute "go run main.go" command in the app src folder.
 
 - To run the app with predefined commands, execute "go run main.go [commands file path]"
-command in the app folder. The commands file should be a text file with a list of commands,
+command in the app src folder. The commands file should be a text file with a list of commands,
 delimited by new line.
 
-- To build the app, execute "go build" command in the app folder.
+- To build the app, execute "go build" command in the app src folder.
