@@ -57,16 +57,16 @@ func (direction Direction) String() string {
 }
 
 // Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
-func Place(position Position, direction Direction) *Robot {
-	// if robot's position is not within the table, return nil
+func Place(position Position, direction Direction, r *Robot) bool {
+	// if robot's position is not within the table, return false
 	if position.X > tableWidth-1 || position.Y > tableLength-1 || position.X < 0 || position.Y < 0 {
-		return nil
+		return false
 	}
 
-	return &Robot{
-		Position:  position,
-		Direction: direction,
-	}
+	r.Position = position
+	r.Direction = direction
+
+	return true
 }
 
 // Move moves a toy robot one unit forward in the direction it is currently facing
@@ -117,7 +117,7 @@ func (robot *Robot) Right() {
 
 // Report announces current position and direction of the robot on the table
 func (robot *Robot) Report() {
-	fmt.Println("\n", robot.Setting()+"\n")
+	fmt.Println("\n" + robot.Setting() + "\n")
 }
 
 // Setting returns current position and direction of the robot on the table
@@ -154,54 +154,49 @@ func (robot *Robot) Display() {
 
 // Process processes commands given to robot
 func Process(command string, aRobot *Robot) *Robot {
-	// check if submitted command is a valid PLACE command
-	regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
-	if regex {
-		// get command's parameters
-		cmd := strings.Split(command, " ")
-		cmd = strings.Split(cmd[1], ",")
+	if strings.HasPrefix(command, "PLACE") {
+		// check if submitted command is a valid PLACE command
+		regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
+		if regex {
+			// get command's parameters
+			cmd := strings.Split(command, " ")
+			cmd = strings.Split(cmd[1], ",")
 
-		// get command's coordinate
-		x, _ := strconv.Atoi(cmd[0])
-		y, _ := strconv.Atoi(cmd[1])
+			// get command's coordinate
+			x, _ := strconv.Atoi(cmd[0])
+			y, _ := strconv.Atoi(cmd[1])
 
-		// extract direction
-		var direction Direction
+			// extract direction
+			var direction Direction
 
-		switch cmd[2] {
-		case "NORTH":
-			direction = North
-		case "EAST":
-			direction = East
-		case "SOUTH":
-			direction = South
-		case "WEST":
-			direction = West
+			switch cmd[2] {
+			case "NORTH":
+				direction = North
+			case "EAST":
+				direction = East
+			case "SOUTH":
+				direction = South
+			case "WEST":
+				direction = West
+			}
+
+			Place(Position{X: x, Y: y}, direction, aRobot)
+		} else {
+			fmt.Println("Invalid PLACE command entered.")
 		}
-
-		// if an invalid place command is entered, get the previous valid robot
-		rbt := aRobot
-		aRobot = Place(Position{X: x, Y: y}, direction)
-
-		if aRobot == nil && rbt != nil {
-			aRobot = rbt
-		}
-	} else if aRobot != nil {
-		switch command {
-		// if robot is valid, allow execution of the rest of valid commands
-		case "MOVE":
-			aRobot.Move()
-		case "LEFT":
-			aRobot.Left()
-		case "RIGHT":
-			aRobot.Right()
-		case "REPORT":
-			aRobot.Report()
-			aRobot.Display()
-			// fmt.Println("Invalid command entered.")
-		}
+	} else if command == "MOVE" && aRobot.Direction.String() != "" {
+		aRobot.Move()
+	} else if command == "LEFT" && aRobot.Direction.String() != "" {
+		aRobot.Left()
+	} else if command == "RIGHT" && aRobot.Direction.String() != "" {
+		aRobot.Right()
+	} else if command == "REPORT" && aRobot.Direction.String() != "" {
+		aRobot.Report()
+		aRobot.Display()
 	} else if command == "EXIT" {
 		os.Exit(0)
+	} else {
+		fmt.Println("Invalid command entered.")
 	}
 
 	return aRobot
