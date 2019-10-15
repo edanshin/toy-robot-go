@@ -59,6 +59,16 @@ Commands will be converted to uppercase automatically and are not case sensitive
 The program has the ability to output graphical representation of a tabletop
 with a robot on it to the console. This also includes robot's direction.
 
+Sample output:
+
+1,2,NORTH
+
+o o o o o
+o o o o o
+o ^ o o o
+o o o o o
+o o o o o
+
 ### Design
 Object-oriented approach has been used for the development of this application.
 
