@@ -3,10 +3,6 @@ package robot
 
 import (
 	"fmt"
-	"os"
-	"regexp"
-	"strconv"
-	"strings"
 )
 
 const (
@@ -58,15 +54,15 @@ func (direction Direction) String() string {
 }
 
 // Place puts a new toy robot on a table in position X,Y and facing NORTH, SOUTH, EAST or WEST
-func Place(position Position, direction Direction, r *Robot) bool {
+func (robot *Robot) Place(position Position, direction Direction) bool {
 	// if robot's position is not within the table, return false
 	if position.X > tableWidth-1 || position.Y > tableLength-1 || position.X < 0 || position.Y < 0 {
 		return false
 	}
 
-	r.Position = position
-	r.Direction = direction
-	r.Placed = true
+	robot.Position = position
+	robot.Direction = direction
+	robot.Placed = true
 
 	return true
 }
@@ -152,56 +148,4 @@ func (robot *Robot) Display() {
 	}
 
 	fmt.Println()
-}
-
-// Process processes commands given to robot
-func Process(command string, aRobot *Robot) *Robot {
-	if strings.HasPrefix(command, "PLACE") {
-		// check if submitted command is a valid PLACE command
-		regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
-		if regex {
-			// get command's parameters
-			cmd := strings.Split(command, " ")
-			cmd = strings.Split(cmd[1], ",")
-
-			// get command's coordinate
-			x, _ := strconv.Atoi(cmd[0])
-			y, _ := strconv.Atoi(cmd[1])
-
-			// extract direction
-			var direction Direction
-
-			switch cmd[2] {
-			case "NORTH":
-				direction = North
-			case "EAST":
-				direction = East
-			case "SOUTH":
-				direction = South
-			case "WEST":
-				direction = West
-			}
-
-			Place(Position{X: x, Y: y}, direction, aRobot)
-		} else {
-			fmt.Println("Invalid PLACE command entered.")
-		}
-	} else if command == "MOVE" && aRobot.Placed {
-		aRobot.Move()
-	} else if command == "LEFT" && aRobot.Placed {
-		aRobot.Left()
-	} else if command == "RIGHT" && aRobot.Placed {
-		aRobot.Right()
-	} else if command == "REPORT" && aRobot.Placed {
-		aRobot.Report()
-		aRobot.Display()
-	} else if command == "EXIT" {
-		os.Exit(0)
-	} else if !aRobot.Placed && command != "EXIT" {
-		fmt.Println("Error: robot is not placed.")
-	} else {
-		fmt.Println("Invalid command entered.")
-	}
-
-	return aRobot
 }
