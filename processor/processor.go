@@ -1,3 +1,4 @@
+// Package processor is responsible for reading and executing commands from console input
 package processor
 
 import (
@@ -22,7 +23,7 @@ func ReadConsole(aRobot *robot.Robot) {
 	ReadConsole(aRobot)
 }
 
-// ReadText .
+// ReadText reads and executes commands from a text file
 func ReadText(aRobot *robot.Robot) {
 	// if an argument for a file is provided, try to read and execute commands from the text file
 	if len(os.Args) == 2 {
