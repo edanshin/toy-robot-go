@@ -62,10 +62,10 @@ Sample output:
 
 2,2,NORTH
 
-o  o  o  o  o  
-o  o  o  o  o  
-o  o  ^  o  o  
-o  o  o  o  o  
+o  o  o  o  o<br/>
+o  o  o  o  o<br/>
+o  o  ^  o  o<br/>
+o  o  o  o  o<br/>
 o  o  o  o  o
 
 ### Design
