@@ -84,6 +84,23 @@ func TestRight(t *testing.T) {
 	}
 }
 
+// TestReadText tests execution of commands from a text file
+func TestReadText(t *testing.T) {
+	aRobot := &robot.Robot{}
+
+	ReadText(aRobot, "../commands.txt")
+
+	if !aRobot.Placed {
+		t.Error("ReadText test failed.")
+	}
+
+	if aRobot.Setting() != "3,3,NORTH" {
+		t.Error("ReadText test failed, expected output 3,3,NORTH, got ", aRobot.Setting())
+	} else {
+		t.Log("ReadText test successful, got ", aRobot.Setting())
+	}
+}
+
 // TestCaseA tests Example a from problem description
 func TestCaseA(t *testing.T) {
 	aRobot := &robot.Robot{}
