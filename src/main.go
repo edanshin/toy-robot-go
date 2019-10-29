@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	var aRobot *robot.Robot = &robot.Robot{}
+	aRobot := &robot.Robot{}
 
 	// if an argument for a file is provided, try to read and execute commands from the text file
 	processor.ReadText(aRobot)
