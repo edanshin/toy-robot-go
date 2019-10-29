@@ -60,13 +60,13 @@ with a robot on it to the console. This also includes robot's direction.
 
 Sample output:
 
-1,2,NORTH
+2,2,NORTH
 
-o o o o o
-o o o o o
-o ^ o o o
-o o o o o
-o o o o o
+o  o  o  o  o
+o  o  o  o  o
+o  o  ^  o  o
+o  o  o  o  o
+o  o  o  o  o
 
 ### Design
 Object-oriented approach has been used for the development of this application.
