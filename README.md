@@ -43,11 +43,11 @@ The application can read commands of the following (textual) form:
 
 ### Test data
 - Test data to exercise the application is provided in the form of unit tests
-(src/processor/processor_test.go).
+(src/*_test.go).
 
-- To run all unit tests, execute command "go test -v" in the "src/processor" folder.
-- To check test coverage, execute command "go test -v -cover" in the "src/processor" folder.
-- To run an individual unit test, execute command "go test -run [function name]" in the "src/processor" folder.
+- To run all unit tests, execute command "go test -v" in the "src" folder.
+- To check test coverage, execute command "go test -v -cover" in the "src" folder.
+- To run an individual unit test, execute command "go test -run [function name]" in the "src" folder.
 
 ### Input
 Input is possible via standard console input as well as via file input.
@@ -71,9 +71,9 @@ o  o  o  o  o
 ### Design
 Object-oriented approach has been used for the development of this application.
 
-- Package "robot" contains all the functions necessary for robot's functionality
+- robot.go contains all the functions necessary for robot's functionality
 (Place, Move, Left, Right, Report).
-- Package "processor" is responsible for reading and executing commands from console input.
+- processor.go is responsible for reading and executing commands from console input.
 - The file "main.go" is responsible for program execution.
 
 ### Development tools
@@ -82,9 +82,9 @@ Object-oriented approach has been used for the development of this application.
    3) Git
 
 ### Build and run the program
-- To run the app, execute "go run main.go" command in the app src folder.
+- To run the app, execute "go run ." command in the app src folder.
 
-- To run the app with predefined commands, execute "go run main.go [commands file path]"
+- To run the app with predefined commands, execute "go run . [commands file path]"
 command in the app src folder. The commands file should be a text file with a list of commands,
 delimited by new line.
 
