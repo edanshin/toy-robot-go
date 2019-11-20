@@ -1,5 +1,4 @@
-// Package robot describes a toy robot
-package robot
+package main
 
 import (
 	"fmt"

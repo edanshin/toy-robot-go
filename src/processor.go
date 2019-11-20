@@ -1,5 +1,4 @@
-// Package processor is responsible for reading and executing commands from console input
-package processor
+package main
 
 import (
 	"bufio"
@@ -8,25 +7,23 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-
-	"../robot"
 )
 
 // ReadConsole executes commands entered via standard console input
-func ReadConsole(aRobot *robot.Robot) {
+func ReadConsole(robot *Robot) {
 	fmt.Print("Robot: ")
 	scanner := bufio.NewScanner(os.Stdin)
 
 	if scanner.Scan() {
 		command := strings.ToUpper(scanner.Text())
-		aRobot = Process(command, aRobot)
+		robot = Process(command, robot)
 	}
 
-	ReadConsole(aRobot)
+	ReadConsole(robot)
 }
 
 // ReadText reads and executes commands from a text file
-func ReadText(aRobot *robot.Robot, filepath string) bool {
+func ReadText(robot *Robot, filepath string) bool {
 	// if an argument for a file is provided, try to read and execute commands from the text file
 	file, err := os.Open(filepath)
 
@@ -41,14 +38,14 @@ func ReadText(aRobot *robot.Robot, filepath string) bool {
 		command := strings.ToUpper(scanner.Text())
 		// output each command to terminal
 		fmt.Println(command)
-		aRobot = Process(command, aRobot)
+		robot = Process(command, robot)
 	}
 
 	return true
 }
 
 // Process processes commands given to robot
-func Process(command string, aRobot *robot.Robot) *robot.Robot {
+func Process(command string, robot *Robot) *Robot {
 	if strings.HasPrefix(command, "PLACE") {
 		// check if submitted command is a valid PLACE command
 		regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
@@ -62,39 +59,39 @@ func Process(command string, aRobot *robot.Robot) *robot.Robot {
 			y, _ := strconv.Atoi(cmd[1])
 
 			// extract direction
-			var direction robot.Direction
+			var direction Direction
 
 			switch cmd[2] {
 			case "NORTH":
-				direction = robot.North
+				direction = North
 			case "EAST":
-				direction = robot.East
+				direction = East
 			case "SOUTH":
-				direction = robot.South
+				direction = South
 			case "WEST":
-				direction = robot.West
+				direction = West
 			}
 
-			aRobot.Place(robot.Position{X: x, Y: y}, direction)
+			robot.Place(Position{X: x, Y: y}, direction)
 		} else {
 			fmt.Println("Invalid PLACE command entered.")
 		}
-	} else if command == "MOVE" && aRobot.Placed {
-		aRobot.Move()
-	} else if command == "LEFT" && aRobot.Placed {
-		aRobot.Left()
-	} else if command == "RIGHT" && aRobot.Placed {
-		aRobot.Right()
-	} else if command == "REPORT" && aRobot.Placed {
-		aRobot.Report()
-		aRobot.Display()
+	} else if command == "MOVE" && robot.Placed {
+		robot.Move()
+	} else if command == "LEFT" && robot.Placed {
+		robot.Left()
+	} else if command == "RIGHT" && robot.Placed {
+		robot.Right()
+	} else if command == "REPORT" && robot.Placed {
+		robot.Report()
+		robot.Display()
 	} else if command == "EXIT" {
 		os.Exit(0)
-	} else if !aRobot.Placed && command != "EXIT" {
+	} else if !robot.Placed && command != "EXIT" {
 		fmt.Println("Error: robot is not placed.")
 	} else {
 		fmt.Println("Invalid command entered.")
 	}
 
-	return aRobot
+	return robot
 }
