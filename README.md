@@ -88,4 +88,4 @@ Object-oriented approach has been used for the development of this application.
 command in the app src folder. The commands file should be a text file with a list of commands,
 delimited by new line.
 
-- To build the app, execute "go build" command in the app src folder.
+- To build the app, execute 'go build -ldflags="-s -w"' command in the app src folder.
