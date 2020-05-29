@@ -87,7 +87,7 @@ func TestRight(t *testing.T) {
 func TestReadText(t *testing.T) {
 	r := new(robot.Robot)
 
-	ReadText(r, "./commands.txt")
+	ReadText(r, "../commands.txt")
 
 	if !r.Placed {
 		t.Error("ReadText test failed.")
