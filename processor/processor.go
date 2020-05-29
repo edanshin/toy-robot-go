@@ -17,7 +17,7 @@ func ReadConsole(r *robot.Robot) {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	if scanner.Scan() {
-		command := strings.ToLower(scanner.Text())
+		command := scanner.Text()
 		Process(command, r)
 	}
 
@@ -37,7 +37,7 @@ func ReadText(r *robot.Robot, filepath string) bool {
 	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
-		command := strings.ToLower(scanner.Text())
+		command := scanner.Text()
 		// output each command to terminal
 		fmt.Println(command)
 		Process(command, r)
@@ -48,6 +48,8 @@ func ReadText(r *robot.Robot, filepath string) bool {
 
 // Process processes commands given to robot
 func Process(command string, r *robot.Robot) {
+	command = strings.ToLower(command)
+
 	switch {
 	case strings.HasPrefix(command, "place"):
 		// check if submitted command is a valid PLACE command
