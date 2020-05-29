@@ -42,16 +42,15 @@ The application can read commands of the following (textual) form:
   and REPORT commands.
 
 ### Test data
-- Test data to exercise the application is provided in the form of unit tests
-(src/*_test.go).
+- Test data to exercise the application is provided in the form of unit tests (*_test.go).
 
-- To run all unit tests, execute command "go test -v" in the "src" folder.
-- To check test coverage, execute command "go test -v -cover" in the "src" folder.
-- To run an individual unit test, execute command "go test -run [function name]" in the "src" folder.
+- To run all unit tests, execute command "go test -v" in the project folder.
+- To check test coverage, execute command "go test -v -cover" in the project folder.
+- To run an individual unit test, execute command "go test -run [function name]" in the project folder.
 
 ### Input
 Input is possible via standard console input as well as via file input.
-Commands will be converted to uppercase automatically and are not case sensitive.
+Commands are not case sensitive.
 - The app allows to execute commands manually after a successful or unsuccessful text file reading.
 
 ### Output
@@ -77,15 +76,15 @@ Object-oriented approach has been used for the development of this application.
 - The file "main.go" is responsible for program execution.
 
 ### Development tools
-   1) Go 1.13
+   1) Go 1.14
    2) VS Code
    3) Git
 
 ### Build and run the program
-- To run the app, execute "go run ." command in the app src folder.
+- To run the app, execute "go run ." command in the project folder.
 
 - To run the app with predefined commands, execute "go run . [commands file path]"
-command in the app src folder. The commands file should be a text file with a list of commands,
+command in the project folder. The commands file should be a text file with a list of commands,
 delimited by new line.
 
-- To build the app, execute 'go build -ldflags="-s -w"' command in the app src folder.
+- To build the app, execute 'go build -ldflags="-s -w"' command in the project folder.

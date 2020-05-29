@@ -1,4 +1,4 @@
-package main
+package processor
 
 import (
 	"bufio"
@@ -7,23 +7,25 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"toy-robot-go/robot"
 )
 
 // ReadConsole executes commands entered via standard console input
-func ReadConsole(robot *Robot) {
+func ReadConsole(r *robot.Robot) {
 	fmt.Print("Robot: ")
 	scanner := bufio.NewScanner(os.Stdin)
 
 	if scanner.Scan() {
-		command := strings.ToUpper(scanner.Text())
-		robot = Process(command, robot)
+		command := strings.ToLower(scanner.Text())
+		Process(command, r)
 	}
 
-	ReadConsole(robot)
+	ReadConsole(r)
 }
 
 // ReadText reads and executes commands from a text file
-func ReadText(robot *Robot, filepath string) bool {
+func ReadText(r *robot.Robot, filepath string) bool {
 	// if an argument for a file is provided, try to read and execute commands from the text file
 	file, err := os.Open(filepath)
 
@@ -35,20 +37,21 @@ func ReadText(robot *Robot, filepath string) bool {
 	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
-		command := strings.ToUpper(scanner.Text())
+		command := strings.ToLower(scanner.Text())
 		// output each command to terminal
 		fmt.Println(command)
-		robot = Process(command, robot)
+		Process(command, r)
 	}
 
 	return true
 }
 
 // Process processes commands given to robot
-func Process(command string, robot *Robot) *Robot {
-	if strings.HasPrefix(command, "PLACE") {
+func Process(command string, r *robot.Robot) {
+	switch {
+	case strings.HasPrefix(command, "place"):
 		// check if submitted command is a valid PLACE command
-		regex := regexp.MustCompile(`PLACE \d,\d,(NORTH|SOUTH|EAST|WEST)`).MatchString(command)
+		regex := regexp.MustCompile(`place \d,\d,(north|south|east|west)`).MatchString(command)
 		if regex {
 			// get command's parameters
 			cmd := strings.Split(command, " ")
@@ -59,39 +62,53 @@ func Process(command string, robot *Robot) *Robot {
 			y, _ := strconv.Atoi(cmd[1])
 
 			// extract direction
-			var direction Direction
+			var direction robot.Direction
 
 			switch cmd[2] {
-			case "NORTH":
-				direction = North
-			case "EAST":
-				direction = East
-			case "SOUTH":
-				direction = South
-			case "WEST":
-				direction = West
+			case "north":
+				direction = robot.North
+			case "east":
+				direction = robot.East
+			case "south":
+				direction = robot.South
+			case "west":
+				direction = robot.West
 			}
 
-			robot.Place(Position{X: x, Y: y}, direction)
+			r.Place(robot.Position{X: x, Y: y}, direction)
 		} else {
 			fmt.Println("Invalid PLACE command entered.")
 		}
-	} else if command == "MOVE" && robot.Placed {
-		robot.Move()
-	} else if command == "LEFT" && robot.Placed {
-		robot.Left()
-	} else if command == "RIGHT" && robot.Placed {
-		robot.Right()
-	} else if command == "REPORT" && robot.Placed {
-		robot.Report()
-		robot.Display()
-	} else if command == "EXIT" {
-		os.Exit(0)
-	} else if !robot.Placed && command != "EXIT" {
-		fmt.Println("Error: robot is not placed.")
-	} else {
-		fmt.Println("Invalid command entered.")
-	}
 
-	return robot
+		break
+
+	case command == "move" && r.Placed:
+		r.Move()
+		break
+
+	case command == "left" && r.Placed:
+		r.Left()
+		break
+
+	case command == "right" && r.Placed:
+		r.Right()
+		break
+
+	case command == "report" && r.Placed:
+		r.Report()
+		r.Display()
+		break
+
+	case command == "exit":
+		os.Exit(0)
+		break
+
+	case !r.Placed && command != "exit":
+		fmt.Println("Error: robot is not placed.")
+		break
+
+	default:
+		fmt.Println("Invalid command entered.")
+		break
+	}
 }
